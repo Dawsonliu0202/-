@@ -4,7 +4,7 @@
 import cv2
 import dlib
 
-path = "img/IMG_1.jpg"
+path = "img/IMG_4.jpg"
 img = cv2.imread(path)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -19,8 +19,12 @@ for face in dets:
     # 遍历所有点，打印出其坐标，并圈出来
     for pt in shape.parts():
         pt_pos = (pt.x, pt.y)
-        cv2.circle(img, pt_pos, 3, (0, 255, 0), 1)
-    cv2.imshow("image", img)
+        cv2.circle(img, pt_pos, 4, (0, 0, 255), 2)
 
+cv2.imwrite("F:/Github/Image-Processing/Code/Output2/img1.jpg", img)
+
+height,width = img.shape[:2]  #获取原图像的水平方向尺寸和垂直方向尺寸。
+res = cv2.resize(img,(width//2,height//2),interpolation=cv2.INTER_CUBIC)   #dsize=（2*width,2*height）
+cv2.imshow('res',res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

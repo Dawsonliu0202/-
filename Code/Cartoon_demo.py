@@ -54,10 +54,13 @@ def pyrUp(img, level=2):
         temp = cv2.pyrUp(temp)
     return temp
 
+
 if __name__ == '__main__':
 
     #读取照片文件
-    path = "F:/Github/Image-Processing/img/IMG_2.jpg"
+    path = "F:/Github/Image-Processing/img/IMG_5.jpg"
+    outpath = "F:/Github/Image-Processing/img/"
+    
     img = cv2.imread(path)
 
     #下采样
@@ -66,7 +69,7 @@ if __name__ == '__main__':
     #上采样
     pyrup_img = pyrUp(pyramid_img)
 
-    #双边滤波
+    #均值漂移滤波
     dst = bilateral_filter(pyrup_img, 1)
 
     #取灰度
@@ -82,7 +85,7 @@ if __name__ == '__main__':
     cartoon_img = cv2.bitwise_and(dst, edge_img)
 
     #储存图片
-    cv2.imwrite("F:/Github/Image-Processing/img/OUTPUT_2.jpg", cartoon_img)
+    cv2.imwrite(outpath + "OUTIMG_5.jpg", cartoon_img)
 
     height,width = img.shape[:2]  #获取原图像的水平方向尺寸和垂直方向尺寸。
     res = cv2.resize(cartoon_img,(width//2,height//2),interpolation=cv2.INTER_CUBIC)   #dsize=（2*width,2*height）
